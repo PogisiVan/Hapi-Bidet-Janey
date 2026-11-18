@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#172b3a">
+<title>Happy na birthday mo pa</title>
+<style>
+:root{
+  --night:#172b3a;--ink:#203344;--cream:#fff8e9;--mint:#a8dfcb;
+  --coral:#ff8e78;--yellow:#ffd36e;--blue:#91c8e8;--white:#fffdf7;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--cream);font-family:"Trebuchet MS",Arial,sans-serif;
+  background:
+    radial-gradient(circle at 12% 14%,#ff8e7826 0 9%,transparent 10%),
+    radial-gradient(circle at 90% 38%,#a8dfcb20 0 12%,transparent 13%),
+    linear-gradient(145deg,#172b3a 0%,#20394a 52%,#172b3a 100%);
+  min-height:100vh;overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;z-index:0;
+  background-image:radial-gradient(#fff 1px,transparent 1px);background-size:23px 23px;
+}
+.wrap{width:min(850px,calc(100% - 36px));margin:auto;position:relative;z-index:1}
+.hero{min-height:94vh;display:grid;place-items:center;text-align:center;padding:70px 0 45px;position:relative}
+.hero-inner{max-width:720px}
+.eyebrow{display:inline-block;font:800 11px/1.3 "Trebuchet MS",Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--night);background:var(--mint);padding:9px 14px;border-radius:999px;transform:rotate(-2deg)}
+h1{font-size:clamp(54px,11vw,100px);line-height:.92;letter-spacing:-.065em;font-weight:900;margin:27px 0 20px;color:var(--cream)}
+h1 em{font-style:normal;color:var(--yellow);display:inline-block;transform:rotate(-3deg)}
+.intro{max-width:520px;margin:0 auto;color:#d6e0df;font:16px/1.8 "Trebuchet MS",Arial,sans-serif}
+.doodle{font-size:clamp(28px,5vw,44px);margin-top:24px;letter-spacing:13px}
+.scroll-hint{margin-top:58px;color:var(--mint);font:800 11px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(9px)}}
+.section{padding:65px 0 85px;text-align:center}
+.section h2{font-size:clamp(30px,6vw,48px);font-weight:900;letter-spacing:-.04em;margin:17px 0 12px}
+.section p{font:15px/1.8 "Trebuchet MS",Arial,sans-serif;color:#d6e0df;max-width:530px;margin:0 auto 24px}
+.pill{display:inline-block;background:var(--yellow);color:var(--night);padding:8px 13px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;transform:rotate(2deg)}
+.video-frame{
+  width:min(690px,100%);margin:32px auto 20px;padding:10px;
+  border:2px solid #a8dfcb99;border-radius:25px;background:#ffffff10;
+  box-shadow:0 24px 65px #0005;transform:rotate(.7deg);position:relative;
+}
+.video-frame:before{content:"✦";position:absolute;top:-19px;right:22px;color:var(--yellow);font-size:35px;z-index:2}
+video{display:block;width:100%;max-height:440px;aspect-ratio:16/9;object-fit:contain;border-radius:17px;background:#0c1822}
+.caption{font:12px "Trebuchet MS",Arial,sans-serif;color:var(--mint);letter-spacing:.06em}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;text-decoration:none;
+  border:0;background:var(--coral);color:var(--night);padding:16px 25px;border-radius:999px;
+  font:900 14px "Trebuchet MS",Arial,sans-serif;box-shadow:0 8px 0 #b95e54,0 15px 30px #0003;
+  transition:transform .2s,box-shadow .2s;margin-top:10px
+}
+.btn:hover{transform:translateY(-4px) rotate(-1deg);box-shadow:0 12px 0 #b95e54,0 20px 35px #0004}
+.btn:active{transform:translateY(4px);box-shadow:0 3px 0 #b95e54}
+.foot{padding:0 0 35px;text-align:center;color:#b7c8c7;font:11px "Trebuchet MS",Arial,sans-serif}
+
+
+.dayzzz{padding:78px 0 92px;position:relative}
+.dayzzz-head{max-width:680px;margin:0 auto 34px;text-align:center}
+.dayzzz-title{font-size:clamp(34px,7vw,62px)!important;line-height:.95;letter-spacing:-.065em!important;margin:20px 0 14px!important}
+.dayzzz-title span{color:var(--coral);display:inline-block;transform:rotate(-3deg)}
+.dayzzz-kicker{display:inline-flex;align-items:center;gap:8px;color:var(--night);background:var(--yellow);padding:9px 14px;border-radius:5px 14px 5px 14px;font:900 10px Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;transform:rotate(2deg)}
+.dayzzz-sub{max-width:540px;margin:0 auto;color:#d6e0df;font:15px/1.8 "Trebuchet MS",Arial,sans-serif}
+.dayzzz-tape{height:13px;width:100px;background:#ffd36eaa;position:absolute;top:8px;left:calc(50% - 50px);transform:rotate(-4deg)}
+.dayzzz-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,2.4vw,24px);align-items:start}
+.dayzzz-card{position:relative;padding:10px 10px 15px;background:#fff8e9;color:#203344;border-radius:7px 7px 17px 7px;box-shadow:0 18px 40px #0005;transform:rotate(var(--tilt));transition:transform .25s,box-shadow .25s}
+.dayzzz-card:nth-child(2){margin-top:28px}
+.dayzzz-card:nth-child(3){margin-top:7px}
+.dayzzz-card:hover{transform:translateY(-8px) rotate(0deg);box-shadow:0 25px 48px #0007;z-index:2}
+.dayzzz-card:before{content:"";position:absolute;z-index:2;top:-9px;left:35%;width:66px;height:19px;background:#a8dfcbbd;transform:rotate(-5deg)}
+.dayzzz-screen{position:relative;overflow:hidden;background:#101a22;border-radius:4px;aspect-ratio:9/16}
+.dayzzz-screen video{width:100%;height:100%;max-height:none;aspect-ratio:auto;object-fit:cover;border-radius:0;background:#101a22}
+.dayzzz-screen:after{content:"";position:absolute;inset:0;pointer-events:none;border:1px solid #ffffff24;box-shadow:inset 0 0 35px #0003}
+.dayzzz-meta{display:flex;justify-content:space-between;align-items:center;gap:5px;padding:12px 3px 0;font:900 10px Arial,sans-serif;letter-spacing:.09em;text-transform:uppercase}
+.dayzzz-meta span:last-child{color:#bd725e}
+.dayzzz-caption{font:12px/1.4 "Trebuchet MS",Arial,sans-serif;color:#526477;padding:5px 3px 0}
+.dayzzz-stamp{position:absolute;right:-12px;top:43px;z-index:3;background:var(--coral);color:var(--night);padding:8px 10px;border-radius:50%;font:900 9px/1.1 Arial,sans-serif;text-align:center;transform:rotate(11deg);box-shadow:0 4px 0 #b95e54}
+.dayzzz-footer{text-align:center;margin:35px auto 0;color:var(--mint);font:900 10px Arial,sans-serif;letter-spacing:.17em;text-transform:uppercase}
+.dayzzz-footer b{color:var(--yellow);font-size:15px;margin:0 7px}
+@media(max-width:620px){
+ .dayzzz{padding:55px 0 65px}
+ .dayzzz-grid{gap:9px}
+ .dayzzz-card{padding:6px 6px 10px;border-radius:5px 5px 12px 5px}
+ .dayzzz-card:nth-child(2){margin-top:17px}
+ .dayzzz-meta{font-size:8px;padding-top:8px;letter-spacing:.04em}
+ .dayzzz-caption{font-size:10px}
+ .dayzzz-stamp{right:-7px;top:28px;font-size:7px;padding:6px}
+}
+@media(max-width:390px){.dayzzz-grid{gap:6px}.dayzzz-card{padding:4px 4px 8px}.dayzzz-meta{font-size:7px}}
+
+@media(max-width:520px){.hero{min-height:88vh}.section{padding:48px 0 65px}.video-frame{padding:7px;border-radius:18px}video{border-radius:12px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+
+.music-toast{position:fixed;left:50%;top:22px;z-index:60;max-width:calc(100vw - 28px);padding:16px 22px;border:3px solid #26384a;border-radius:22px;background:#ffe18b;color:#26384a;box-shadow:5px 6px 0 #26384a;text-align:center;font:1000 clamp(17px,4vw,25px)/1.15 "Trebuchet MS",Arial,sans-serif;letter-spacing:.035em;transform:translate(-50%,-18px) rotate(-2deg) scale(.86);opacity:0;visibility:hidden;pointer-events:none}
+.music-toast.show{visibility:visible;animation:toastCelebrate 2.8s cubic-bezier(.2,.8,.2,1) both}
+.music-toast:before,.music-toast:after{content:"✦";position:absolute;color:#e98c76;font-size:22px}
+.music-toast:before{left:-10px;top:-13px}.music-toast:after{right:-9px;bottom:-14px}
+@keyframes toastCelebrate{0%{opacity:0;transform:translate(-50%,-18px) rotate(-7deg) scale(.7)}12%,78%{opacity:1;transform:translate(-50%,0) rotate(-2deg) scale(1)}100%{opacity:0;transform:translate(-50%,-8px) rotate(2deg) scale(.94)}}
+@media(max-width:520px){.music-toast{top:max(14px,env(safe-area-inset-top));padding:14px 17px;border-radius:18px;width:max-content;max-width:calc(100vw - 32px)}}
+@media(prefers-reduced-motion:reduce){.music-toast.show{animation:none;opacity:1;visibility:visible}}
+
+
+.music-dock{position:fixed;right:18px;bottom:18px;z-index:30;display:flex;align-items:center;gap:8px}
+.music-toggle,.volume-toggle{min-height:46px;border:2px solid #a8dfcb;background:#fff8e9;color:#203344;border-radius:999px;padding:11px 15px;font:900 11px "Trebuchet MS",Arial,sans-serif;letter-spacing:.06em;box-shadow:0 5px 0 #789e91,0 10px 22px #0003;cursor:pointer}
+.volume-toggle{width:46px;padding:0;font-size:17px;display:grid;place-items:center}
+.music-toggle:focus-visible,.volume-toggle:focus-visible,.volume-slider:focus-visible{outline:3px solid #ffd36e;outline-offset:4px}
+.volume-panel{position:absolute;right:0;bottom:58px;display:none;align-items:center;gap:10px;padding:12px 14px;border:2px solid #a8dfcb;border-radius:16px;background:#fff8e9;box-shadow:0 5px 0 #789e91,0 10px 22px #0003;min-width:180px;color:#203344;font:800 11px "Trebuchet MS",Arial,sans-serif}
+.volume-panel.open{display:flex;animation:volumePop .18s ease-out}
+.volume-slider{width:112px;accent-color:#e98c76;cursor:pointer;touch-action:pan-y}
+.music-hint{position:absolute;right:6px;bottom:62px;white-space:nowrap;background:#ffe18b;color:#26384a;border:2px dashed #26384a;border-radius:13px;padding:7px 10px;font:900 10px "Trebuchet MS",Arial,sans-serif;transform:rotate(-5deg);box-shadow:3px 4px 0 #26384a;pointer-events:none;animation:hintBob 1.5s ease-in-out infinite alternate}
+.music-hint:after{content:"↘";position:absolute;right:18px;top:22px;font-size:25px;transform:translate(9px,13px) rotate(12deg)}
+@keyframes hintBob{to{transform:translateY(-5px) rotate(-2deg)}}
+@keyframes volumePop{from{opacity:0;transform:translateY(6px) scale(.96)}to{opacity:1;transform:none}}
+@media(max-width:520px){.music-dock{right:12px;bottom:max(12px,env(safe-area-inset-bottom));gap:7px}.music-toggle{padding:10px 12px;font-size:10px}.volume-toggle{width:44px;min-height:44px}.music-hint{right:2px;bottom:58px;font-size:9px}.volume-panel{bottom:54px;min-width:174px}}
+@media(prefers-reduced-motion:reduce){.music-hint{animation:none}.volume-panel.open{animation:none}}
+
+</style>
+</head>
+<body>
+<audio id="siteMusic" src="assets/about-you.mp3" autoplay loop preload="auto"></audio>
+<div class="music-toast" id="musicToast" role="status" aria-live="polite">this day is ABOUT YOU!! ☆</div>
+<div class="music-dock">
+  <div class="music-hint" id="musicHint">psst! click click</div>
+  <div class="volume-panel" id="volumePanel" aria-label="Music volume">
+    <label for="volumeSlider">VOLUME</label>
+    <input class="volume-slider" id="volumeSlider" type="range" min="0" max="1" step="0.01" value="0.7" aria-label="Music volume">
+  </div>
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="Pause background music">♫ MUSIC: ON</button>
+  <button class="volume-toggle" id="volumeToggle" type="button" aria-label="Adjust music volume" aria-expanded="false">♫</button>
+</div>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">what's up janey???</div>
+      <h1>EYYYY,<br><em>JANNAH!</em></h1>
+      <p class="intro">didn't expect this, no? you must've thought i've forgotten, guess what? time to put those coding sessions into work RAAAAAHHHH.</p>
+      <div class="doodle" aria-hidden="true">✦ ☁︎ ☆</div>
+      <div class="scroll-hint">↓ &nbsp; keep scrolling langss</div>
+    </div>
+  </section>
+
+  <section class="section" id="little-video">
+    <div class="pill">remember? laguna naging tagaytay and bohol pa</div>
+    <h2>when you were still here sa pinas</h2>
+    <p>just a little moment from back then, we didn't have much videos dang it</p>
+    <div class="video-frame">
+      <video id="birthdayVideo" controls playsinline preload="metadata">
+        <source src="assets/birthday-video.mp4" type="video/mp4">
+        Sorry, your browser doesn't support this video.
+      </video>
+    </div>
+    <div class="caption">☆ &nbsp; sum memory lane earlier this year</div>
+  </section>
+
+
+  <section class="section dayzzz" id="dayzzz">
+    <div class="dayzzz-tape" aria-hidden="true"></div>
+    <div class="dayzzz-head">
+      <div class="dayzzz-kicker">✦ camera roll chaos / vol. 01 ✦</div>
+      <h2 class="dayzzz-title">Musically/<br><span>Transitionist Dayzzz</span></h2>
+      <p class="dayzzz-sub">speaking of memories, I may have a better one.. whoops, scroll down so you'll know what i'm talking about ☆</p>
+    </div>
+    <div class="dayzzz-grid">
+      <article class="dayzzz-card" style="--tilt:-2.2deg">
+        <div class="dayzzz-stamp">ON<br>REPEAT</div>
+        <div class="dayzzz-screen">
+          <video class="dayzzz-video" muted loop playsinline preload="metadata" aria-label="Tiktoker dayzzz video one">
+            <source src="assets/dayzzz-01.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="dayzzz-meta"><span>CLIP_001</span><span>★ fave</span></div>
+        <div class="dayzzz-caption">back in our days, ts was tuff</div>
+      </article>
+      <article class="dayzzz-card" style="--tilt:1.3deg">
+        <div class="dayzzz-stamp" style="background:var(--mint);transform:rotate(-9deg)">NO<br>SKIPS</div>
+        <div class="dayzzz-screen">
+          <video class="dayzzz-video" muted loop playsinline preload="metadata" aria-label="Tiktoker dayzzz video two">
+            <source src="assets/dayzzz-02.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="dayzzz-meta"><span>CLIP_002</span><span>☆ iconic</span></div>
+        <div class="dayzzz-caption">yie may pa emoji pa yan siya</div>
+      </article>
+      <article class="dayzzz-card" style="--tilt:-1deg">
+        <div class="dayzzz-stamp" style="background:var(--blue);transform:rotate(8deg)">100%<br>YOU</div>
+        <div class="dayzzz-screen">
+          <video class="dayzzz-video" muted loop playsinline preload="metadata" aria-label="Tiktoker dayzzz video three">
+            <source src="assets/dayzzz-03.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="dayzzz-meta"><span>CLIP_003</span><span>✦ replay</span></div>
+        <div class="dayzzz-caption">with the slo-mo and shake pa noh</div>
+      </article>
+    </div>
+    <div class="dayzzz-footer"><b>✳</b> paganun / paganyan / paganito <b>✳</b></div>
+  </section>
+
+  <section class="section" style="padding-top:18px">
+    <div class="pill">okay, here we go</div>
+    <h2>Got another surprise for you! </h2>
+    <p>you deserve this been one of my oldest friends, worth the effort so click mo naaaa</p>
+    <a class="btn" href="surprise.html">OPEN SESAME! &nbsp; ✨</a>
+  </section>
+  <div class="foot">made with extra love, just for Jannah ☆</div>
+</main>
+
+<script>
+
+(() => {
+  const section = document.getElementById("dayzzz");
+  const clips = section ? [...section.querySelectorAll(".dayzzz-video")] : [];
+  if (!section || !clips.length) return;
+  let sectionIsVisible = false;
+  const syncPlayback = () => {
+    clips.forEach(video => {
+      if (sectionIsVisible && !document.hidden) {
+        const attempt = video.play();
+        if (attempt && typeof attempt.catch === "function") attempt.catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  };
+  const observer = new IntersectionObserver(entries => {
+    sectionIsVisible = entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= 0.22);
+    syncPlayback();
+  }, { threshold: [0, 0.22, 0.5] });
+  observer.observe(section);
+  document.addEventListener("visibilitychange", syncPlayback);
+})();
+</script>
+
+
+<script>
+
+(() => {
+  const music = document.getElementById("siteMusic");
+  const toggle = document.getElementById("musicToggle");
+  const volumeToggle = document.getElementById("volumeToggle");
+  const panel = document.getElementById("volumePanel");
+  const slider = document.getElementById("volumeSlider");
+  const hint = document.getElementById("musicHint");
+  const toast = document.getElementById("musicToast");
+  if (!music || !toggle || !volumeToggle || !panel || !slider) return;
+
+  const KEY = "jannahBirthdayMusicSession";
+  const readState = () => {
+    try { return JSON.parse(sessionStorage.getItem(KEY) || "null"); }
+    catch (_) { return null; }
+  };
+  const saveState = () => {
+    try {
+      sessionStorage.setItem(KEY, JSON.stringify({
+        time: Number.isFinite(music.currentTime) ? music.currentTime : 0,
+        volume: music.volume,
+        playing: !music.paused
+      }));
+    } catch (_) {}
+  };
+
+  const saved = readState();
+  music.loop = true;
+  music.volume = saved && typeof saved.volume === "number" ? saved.volume : Number(slider.value);
+  slider.value = String(music.volume);
+
+  const paint = () => {
+    const playing = !music.paused;
+    toggle.textContent = playing ? "♫ MUSIC: ON" : "♫ MUSIC: OFF";
+    toggle.setAttribute("aria-label", playing ? "Pause background music" : "Play background music");
+  };
+  const startMusic = () => music.play().then(paint).catch(paint);
+
+
+  music.addEventListener("loadedmetadata", () => {
+    if (saved && Number.isFinite(saved.time) && saved.time > 0) {
+      try { music.currentTime = Math.min(saved.time, Math.max(0, music.duration - 0.25)); } catch (_) {}
+    }
+    if (!saved || saved.playing !== false) startMusic();
+    else paint();
+  }, { once: true });
+
+
+  if (!saved || saved.playing !== false) startMusic();
+  else paint();
+
+  let toastTimer;
+  const celebrateMusicOn = () => {
+    if (!toast) return;
+    toast.classList.remove("show");
+    void toast.offsetWidth;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 2900);
+  };
+
+  toggle.addEventListener("click", () => {
+    if (music.paused) {
+      startMusic();
+      celebrateMusicOn();
+    } else {
+      music.pause();
+      paint();
+    }
+    saveState();
+    if (hint) hint.hidden = true;
+  });
+  volumeToggle.addEventListener("click", () => {
+    const open = panel.classList.toggle("open");
+    volumeToggle.setAttribute("aria-expanded", String(open));
+    if (hint) hint.hidden = true;
+  });
+  slider.addEventListener("input", () => {
+    music.volume = Number(slider.value);
+    saveState();
+  });
+
+  const firstTap = event => {
+    if (event.target && event.target.closest && event.target.closest(".music-dock")) return;
+    if (music.paused && (!saved || saved.playing !== false)) startMusic();
+    if (hint) hint.hidden = true;
+    document.removeEventListener("pointerdown", firstTap);
+    document.removeEventListener("keydown", firstKeyTap);
+  };
+  const firstKeyTap = () => {
+    if (music.paused && (!saved || saved.playing !== false)) startMusic();
+    if (hint) hint.hidden = true;
+    document.removeEventListener("pointerdown", firstTap);
+    document.removeEventListener("keydown", firstKeyTap);
+  };
+  document.addEventListener("pointerdown", firstTap);
+  document.addEventListener("keydown", firstKeyTap);
+
+  music.addEventListener("timeupdate", saveState);
+  music.addEventListener("play", () => { paint(); saveState(); });
+  music.addEventListener("pause", () => { paint(); saveState(); });
+  window.addEventListener("pagehide", saveState);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) saveState();
+  });
+  document.addEventListener("pointerdown", event => {
+    if (!panel.contains(event.target) && event.target !== volumeToggle) {
+      panel.classList.remove("open");
+      volumeToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+
+
+  document.querySelectorAll('a[href="surprise.html"]').forEach(link => {
+    link.addEventListener("click", saveState);
+  });
+  paint();
+})();
+</script>
+</body>
+</html>

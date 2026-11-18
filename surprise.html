@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#172b3a">
+<title>HAPI BIDET</title>
+<style>
+:root{--night:#172b3a;--cream:#fff8e9;--mint:#a8dfcb;--coral:#ff8e78;--yellow:#ffd36e;--blue:#91c8e8}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;overflow-x:hidden;color:var(--cream);
+  font-family:"Trebuchet MS",Arial,sans-serif;
+  background:
+    radial-gradient(circle at 12% 12%,#ff8e7828 0 10%,transparent 11%),
+    radial-gradient(circle at 88% 72%,#a8dfcb22 0 12%,transparent 13%),
+    linear-gradient(145deg,#172b3a,#20394a 55%,#172b3a);
+}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.11;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:23px 23px}
+#confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:10}
+.conf{position:absolute;top:-22px;width:9px;height:14px;border-radius:2px;opacity:.95;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(760deg);opacity:.12}}
+.wrap{width:min(800px,calc(100% - 34px));margin:auto;position:relative;z-index:1;padding:58px 0 85px;text-align:center}
+.eyebrow{display:inline-block;background:var(--mint);color:var(--night);padding:9px 14px;border-radius:999px;font:900 10px "Trebuchet MS",Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;transform:rotate(-2deg)}
+h1{font-size:clamp(46px,9vw,84px);font-weight:900;line-height:.94;letter-spacing:-.06em;margin:24px 0 17px}
+h1 em{font-style:normal;color:var(--yellow);display:inline-block;transform:rotate(-2deg)}
+.sub{font:15px/1.8 "Trebuchet MS",Arial,sans-serif;color:#d6e0df;max-width:540px;margin:0 auto 28px}
+.sparkle{font-size:32px;letter-spacing:10px;margin:15px 0 8px}
+.letter{
+  margin:36px auto 68px;max-width:650px;text-align:left;padding:clamp(25px,5vw,44px);
+  color:#29394a;background:#fff8e9;border:3px solid var(--yellow);border-radius:9px 22px 17px 22px;
+  box-shadow:8px 9px 0 #ff8e78,0 22px 55px #0004;position:relative;transform:rotate(-.6deg)
+}
+.letter:before{content:"A LITTLE BIRTHDAY NOTE";display:block;font:900 10px "Trebuchet MS",Arial,sans-serif;letter-spacing:.18em;color:#bd725e;margin-bottom:22px}
+.letter:after{content:"☆";position:absolute;right:22px;top:13px;font-size:28px;color:#ff8e78;transform:rotate(12deg)}
+.letter-content{
+  min-height:155px;white-space:pre-wrap;font-family:"Segoe Print","Bradley Hand","Comic Sans MS",cursive;
+  font-size:clamp(16px,2.6vw,21px);line-height:1.9;color:#34485a
+}
+.signature{margin-top:22px;color:#bd725e;font-family:"Segoe Print","Bradley Hand","Comic Sans MS",cursive;font-size:18px}
+.present-area{padding-top:8px}
+.present-area h2{font-size:clamp(28px,6vw,45px);font-weight:900;letter-spacing:-.04em;margin:17px 0 10px}
+.present-area .sub{margin-bottom:10px}
+.present{width:170px;height:145px;margin:38px auto 17px;position:relative;cursor:pointer;filter:drop-shadow(0 17px 17px #0005);transition:transform .25s;outline:none}
+.present:hover,.present:focus-visible{transform:translateY(-7px) rotate(-3deg)}
+.box{position:absolute;bottom:0;left:15px;width:140px;height:98px;background:linear-gradient(135deg,#ff987f,#e66e68);border-radius:9px}
+.lid{position:absolute;left:5px;top:26px;width:160px;height:32px;background:linear-gradient(135deg,#ffe08a,#f4b94f);border-radius:8px;transform:rotate(-2deg);transform-origin:left bottom;transition:transform .55s}
+.ribbon-v{position:absolute;left:77px;bottom:0;width:18px;height:98px;background:#91c8e8}
+.ribbon-top{position:absolute;left:77px;top:7px;width:18px;height:50px;background:#91c8e8;z-index:2}
+.bow{position:absolute;top:0;left:61px;width:49px;height:30px;border:9px solid #91c8e8;border-radius:50% 50% 5px 50%;transform:rotate(25deg);z-index:3}
+.bow:after{content:"";position:absolute;width:29px;height:23px;border:8px solid #91c8e8;border-radius:50% 50% 50% 5px;left:17px;top:-9px;transform:rotate(-50deg)}
+.present.opened .lid{transform:translate(36px,-36px) rotate(24deg)}
+.present.opened .bow{transform:translate(34px,-33px) rotate(50deg);transition:transform .5s}
+.open-label{font:900 11px "Trebuchet MS",Arial,sans-serif;color:var(--mint);letter-spacing:.16em}
+.gallery{display:none;margin:34px auto 0;max-width:590px;animation:rise .55s ease both}
+.gallery.show{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+.photo-card{
+  width:100%;border:2px solid var(--mint);border-radius:22px;padding:10px;background:#ffffff10;
+  box-shadow:0 20px 60px #0005;cursor:pointer;transition:transform .22s,opacity .2s;display:block
+}
+.photo-card:hover{transform:translateY(-4px) rotate(.4deg)}
+.photo-card:focus-visible{outline:3px solid var(--yellow);outline-offset:5px}
+.photo-card img{width:100%;height:min(58vh,520px);object-fit:contain;border-radius:13px;background:#0c1822;display:block}
+.photo-note{font:15px/1.7 "Trebuchet MS",Arial,sans-serif;color:#e2e9e3;margin:18px 8px 8px}
+.counter{font:900 10px "Trebuchet MS",Arial,sans-serif;color:var(--yellow);letter-spacing:.16em;text-transform:uppercase;margin:13px 0 17px}
+.next{border:0;background:var(--yellow);color:var(--night);border-radius:999px;padding:13px 22px;font:900 12px "Trebuchet MS",Arial,sans-serif;cursor:pointer;box-shadow:0 5px 0 #c49b43;transition:transform .2s}
+.next:hover{transform:translateY(-3px) rotate(-1deg)}
+.end-note{display:none;margin:26px auto 0;color:var(--mint);font-size:clamp(22px,4vw,30px);font-weight:900;line-height:1.4}
+.end-note.show{display:block;animation:rise .5s ease both}
+@media(max-width:520px){.wrap{padding-top:42px}.letter{margin-bottom:58px}.photo-card{padding:7px}.photo-card img{height:52vh}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+
+.music-toast{position:fixed;left:50%;top:22px;z-index:60;max-width:calc(100vw - 28px);padding:16px 22px;border:3px solid #26384a;border-radius:22px;background:#ffe18b;color:#26384a;box-shadow:5px 6px 0 #26384a;text-align:center;font:1000 clamp(17px,4vw,25px)/1.15 "Trebuchet MS",Arial,sans-serif;letter-spacing:.035em;transform:translate(-50%,-18px) rotate(-2deg) scale(.86);opacity:0;visibility:hidden;pointer-events:none}
+.music-toast.show{visibility:visible;animation:toastCelebrate 2.8s cubic-bezier(.2,.8,.2,1) both}
+.music-toast:before,.music-toast:after{content:"✦";position:absolute;color:#e98c76;font-size:22px}
+.music-toast:before{left:-10px;top:-13px}.music-toast:after{right:-9px;bottom:-14px}
+@keyframes toastCelebrate{0%{opacity:0;transform:translate(-50%,-18px) rotate(-7deg) scale(.7)}12%,78%{opacity:1;transform:translate(-50%,0) rotate(-2deg) scale(1)}100%{opacity:0;transform:translate(-50%,-8px) rotate(2deg) scale(.94)}}
+@media(max-width:520px){.music-toast{top:max(14px,env(safe-area-inset-top));padding:14px 17px;border-radius:18px;width:max-content;max-width:calc(100vw - 32px)}}
+@media(prefers-reduced-motion:reduce){.music-toast.show{animation:none;opacity:1;visibility:visible}}
+
+
+.music-dock{position:fixed;right:18px;bottom:18px;z-index:30;display:flex;align-items:center;gap:8px}
+.music-toggle,.volume-toggle{min-height:46px;border:2px solid #a8dfcb;background:#fff8e9;color:#203344;border-radius:999px;padding:11px 15px;font:900 11px "Trebuchet MS",Arial,sans-serif;letter-spacing:.06em;box-shadow:0 5px 0 #789e91,0 10px 22px #0003;cursor:pointer}
+.volume-toggle{width:46px;padding:0;font-size:17px;display:grid;place-items:center}
+.music-toggle:focus-visible,.volume-toggle:focus-visible,.volume-slider:focus-visible{outline:3px solid #ffd36e;outline-offset:4px}
+.volume-panel{position:absolute;right:0;bottom:58px;display:none;align-items:center;gap:10px;padding:12px 14px;border:2px solid #a8dfcb;border-radius:16px;background:#fff8e9;box-shadow:0 5px 0 #789e91,0 10px 22px #0003;min-width:180px;color:#203344;font:800 11px "Trebuchet MS",Arial,sans-serif}
+.volume-panel.open{display:flex;animation:volumePop .18s ease-out}
+.volume-slider{width:112px;accent-color:#e98c76;cursor:pointer;touch-action:pan-y}
+.music-hint{position:absolute;right:6px;bottom:62px;white-space:nowrap;background:#ffe18b;color:#26384a;border:2px dashed #26384a;border-radius:13px;padding:7px 10px;font:900 10px "Trebuchet MS",Arial,sans-serif;transform:rotate(-5deg);box-shadow:3px 4px 0 #26384a;pointer-events:none;animation:hintBob 1.5s ease-in-out infinite alternate}
+.music-hint:after{content:"↘";position:absolute;right:18px;top:22px;font-size:25px;transform:translate(9px,13px) rotate(12deg)}
+@keyframes hintBob{to{transform:translateY(-5px) rotate(-2deg)}}
+@keyframes volumePop{from{opacity:0;transform:translateY(6px) scale(.96)}to{opacity:1;transform:none}}
+@media(max-width:520px){.music-dock{right:12px;bottom:max(12px,env(safe-area-inset-bottom));gap:7px}.music-toggle{padding:10px 12px;font-size:10px}.volume-toggle{width:44px;min-height:44px}.music-hint{right:2px;bottom:58px;font-size:9px}.volume-panel{bottom:54px;min-width:174px}}
+@media(prefers-reduced-motion:reduce){.music-hint{animation:none}.volume-panel.open{animation:none}}
+
+</style>
+</head>
+<body>
+<audio id="siteMusic" src="assets/about-you.mp3" autoplay loop preload="auto"></audio>
+<div class="music-toast" id="musicToast" role="status" aria-live="polite">this day is ABOUT YOU!! ☆</div>
+<div class="music-dock">
+  <div class="music-hint" id="musicHint">psst! click click</div>
+  <div class="volume-panel" id="volumePanel" aria-label="Music volume">
+    <label for="volumeSlider">VOLUME</label>
+    <input class="volume-slider" id="volumeSlider" type="range" min="0" max="1" step="0.01" value="0.7" aria-label="Music volume">
+  </div>
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="Pause background music">♫ MUSIC: ON</button>
+  <button class="volume-toggle" id="volumeToggle" type="button" aria-label="Adjust music volume" aria-expanded="false">♫</button>
+</div>
+
+<div id="confetti" aria-hidden="true"></div>
+<main class="wrap">
+  <div class="eyebrow">drumroll, please...</div>
+  <div class="sparkle" aria-hidden="true">✦ ☆ ✦</div>
+  <h1>HAPPY BIRTHDAY,<br><em>JANNAH!</em></h1>
+  <p class="sub">YESSURRRR!! It's officially your day. I hope it comes with big smiles, happy little moments, and all the blessings you deserve.. and you should know, you deserve as much as you give! ☆</p>
+
+  <section class="letter" aria-label="Birthday letter">
+    <div class="letter-content">HELLO, i hope i'm not so late to greet you and there are probably a lot of people who already have at exact 12 or earlier this day pero kasi.. TULOG AKO NUN!!! yk, got a lot of things goin on for myself but i could never forget one of my bestfriend's birthdayyyy.
+
+this day is vv special because it serves as you going 18, we both are na and pwede na makulong kaya dapat medyo hinay hinay na tlgaaa. we've been at it ever since childhood and one of the first person na nakilala ko since we've moved here back in 2017, before yung pinsan mong unggoy haha.
+
+i know i don't really say it as much but i do appreciate you for being here ever since then, through kalokohans sa gym man or volleyball, maybe just hanging out sa house and ofc serious moments, ESPECIALLY when im like down down and that just means the total world to me. i'm saying this now cuz you deserve it, i don't say it often but i know probably should haha.
+
+anw, i hope this day blesses you well my programming partner cuz you deserve most of the good things this world will offer. you are more than what you show, you have an utmost sincere depth to your being and that's such a beautiful thing, i've known that for this long.
+
+Happy 18th birthday twin, wag madadapa:>
+</div>
+    
+    <div class="signature">— Eck ☆</div>
+  </section>
+
+  <section class="present-area">
+    <div class="eyebrow">wait... not the end, meron paaaa</div>
+    <h2>I got you a little present 🎁</h2>
+    <p class="sub">Try to tap ung present! Just a few more memories. Tap mo rin each photo to see the next one.</p>
+    <div class="present" id="present" role="button" tabindex="0" aria-label="Open the birthday present">
+      <div class="box"></div><div class="ribbon-v"></div><div class="lid"></div><div class="ribbon-top"></div><div class="bow"></div>
+    </div>
+    <div class="open-label" id="openLabel">TAP TO UNWRAP!</div>
+
+    <div class="gallery" id="gallery">
+      <button class="photo-card" id="photoCard" type="button" title="Tap to reveal the next photo" aria-label="Show the next memory">
+        <img id="memoryPhoto" src="assets/memory-1.jpg" alt="A shared memory, photo 1">
+      </button>
+      <div class="photo-note" id="photoNote">sum long distance coding EYYY</div>
+      <div class="counter" id="counter">MEMORY 1 / 4</div>
+      <button class="next" id="nextBtn" type="button">NEXT MEMORY! &nbsp; →</button>
+      <div class="end-note" id="endNote">That's all of them! (didn't have much pics hays) But definitely not all the memories. ☆<br>HAPPY 18TH BIRTHDAY, JANNAH!!</div>
+    </div>
+  </section>
+</main>
+<script>
+const photos = [
+  "assets/memory-1.jpg",
+  "assets/memory-2.png",
+  "assets/memory-3.jpg",
+  "assets/memory-4.jpg"
+];
+const notes = [
+  "sum long distance coding EYYY",
+  "cout << take two;",
+  "when kaya gym ulit??",
+  "and here's the last one... for now lang nmn. ☆"
+];
+let current = 0;
+const present = document.getElementById("present");
+const gallery = document.getElementById("gallery");
+const openLabel = document.getElementById("openLabel");
+const photo = document.getElementById("memoryPhoto");
+const note = document.getElementById("photoNote");
+const counter = document.getElementById("counter");
+const nextBtn = document.getElementById("nextBtn");
+const endNote = document.getElementById("endNote");
+
+function confetti(){
+  const area=document.getElementById("confetti");
+  const colors=["#ffd36e","#ff8e78","#fff8e9","#a8dfcb","#91c8e8"];
+  for(let i=0;i<100;i++){
+    const bit=document.createElement("i");
+    bit.className="conf";
+    bit.style.left=Math.random()*100+"%";
+    bit.style.background=colors[i%colors.length];
+    bit.style.animationDuration=(2.7+Math.random()*3.2)+"s";
+    bit.style.animationDelay=(Math.random()*.8)+"s";
+    bit.style.transform=`rotate(${Math.random()*180}deg)`;
+    area.appendChild(bit);
+    setTimeout(()=>bit.remove(),6800);
+  }
+}
+function openPresent(){
+  if(gallery.classList.contains("show")) return;
+  present.classList.add("opened");
+  gallery.classList.add("show");
+  openLabel.textContent="SURPRISE!! SUM OF OUR MEMORIES TOGETHERRR";
+  present.setAttribute("aria-disabled","true");
+  present.style.cursor="default";
+  confetti();
+  gallery.scrollIntoView({behavior:"smooth",block:"center"});
+}
+function showNext(){
+  if(current >= photos.length-1){
+    endNote.classList.add("show");
+    return;
+  }
+  current++;
+  photo.style.opacity="0";
+  setTimeout(()=>{
+    photo.src=photos[current];
+    photo.alt=`A shared memory, photo ${current+1}`;
+    note.textContent=notes[current];
+    counter.textContent=`MEMORY ${current+1} / ${photos.length}`;
+    photo.style.opacity="1";
+    if(current===photos.length-1){
+      nextBtn.hidden=true;
+      note.textContent=notes[current]+" Tap mo ung last photo for one final birthday message!";
+    }
+  },180);
+}
+present.addEventListener("click",openPresent);
+present.addEventListener("keydown",event=>{
+  if(event.key==="Enter"||event.key===" "){event.preventDefault();openPresent();}
+});
+document.getElementById("photoCard").addEventListener("click",()=>{
+  if(current===photos.length-1){endNote.classList.add("show");}
+  else{showNext();}
+});
+nextBtn.addEventListener("click",showNext);
+confetti();
+</script>
+
+<script>
+
+(() => {
+  const music = document.getElementById("siteMusic");
+  const toggle = document.getElementById("musicToggle");
+  const volumeToggle = document.getElementById("volumeToggle");
+  const panel = document.getElementById("volumePanel");
+  const slider = document.getElementById("volumeSlider");
+  const hint = document.getElementById("musicHint");
+  const toast = document.getElementById("musicToast");
+  if (!music || !toggle || !volumeToggle || !panel || !slider) return;
+
+  const KEY = "jannahBirthdayMusicSession";
+  const readState = () => {
+    try { return JSON.parse(sessionStorage.getItem(KEY) || "null"); }
+    catch (_) { return null; }
+  };
+  const saveState = () => {
+    try {
+      sessionStorage.setItem(KEY, JSON.stringify({
+        time: Number.isFinite(music.currentTime) ? music.currentTime : 0,
+        volume: music.volume,
+        playing: !music.paused
+      }));
+    } catch (_) {}
+  };
+
+  const saved = readState();
+  music.loop = true;
+  music.volume = saved && typeof saved.volume === "number" ? saved.volume : Number(slider.value);
+  slider.value = String(music.volume);
+
+  const paint = () => {
+    const playing = !music.paused;
+    toggle.textContent = playing ? "♫ MUSIC: ON" : "♫ MUSIC: OFF";
+    toggle.setAttribute("aria-label", playing ? "Pause background music" : "Play background music");
+  };
+  const startMusic = () => music.play().then(paint).catch(paint);
+
+  
+  music.addEventListener("loadedmetadata", () => {
+    if (saved && Number.isFinite(saved.time) && saved.time > 0) {
+      try { music.currentTime = Math.min(saved.time, Math.max(0, music.duration - 0.25)); } catch (_) {}
+    }
+    if (!saved || saved.playing !== false) startMusic();
+    else paint();
+  }, { once: true });
+
+
+  if (!saved || saved.playing !== false) startMusic();
+  else paint();
+
+  let toastTimer;
+  const celebrateMusicOn = () => {
+    if (!toast) return;
+    toast.classList.remove("show");
+    void toast.offsetWidth;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 2900);
+  };
+
+  toggle.addEventListener("click", () => {
+    if (music.paused) {
+      startMusic();
+      celebrateMusicOn();
+    } else {
+      music.pause();
+      paint();
+    }
+    saveState();
+    if (hint) hint.hidden = true;
+  });
+  volumeToggle.addEventListener("click", () => {
+    const open = panel.classList.toggle("open");
+    volumeToggle.setAttribute("aria-expanded", String(open));
+    if (hint) hint.hidden = true;
+  });
+  slider.addEventListener("input", () => {
+    music.volume = Number(slider.value);
+    saveState();
+  });
+
+  const firstTap = event => {
+    if (event.target && event.target.closest && event.target.closest(".music-dock")) return;
+    if (music.paused && (!saved || saved.playing !== false)) startMusic();
+    if (hint) hint.hidden = true;
+    document.removeEventListener("pointerdown", firstTap);
+    document.removeEventListener("keydown", firstKeyTap);
+  };
+  const firstKeyTap = () => {
+    if (music.paused && (!saved || saved.playing !== false)) startMusic();
+    if (hint) hint.hidden = true;
+    document.removeEventListener("pointerdown", firstTap);
+    document.removeEventListener("keydown", firstKeyTap);
+  };
+  document.addEventListener("pointerdown", firstTap);
+  document.addEventListener("keydown", firstKeyTap);
+
+  music.addEventListener("timeupdate", saveState);
+  music.addEventListener("play", () => { paint(); saveState(); });
+  music.addEventListener("pause", () => { paint(); saveState(); });
+  window.addEventListener("pagehide", saveState);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) saveState();
+  });
+  document.addEventListener("pointerdown", event => {
+    if (!panel.contains(event.target) && event.target !== volumeToggle) {
+      panel.classList.remove("open");
+      volumeToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+
+
+  document.querySelectorAll('a[href="surprise.html"]').forEach(link => {
+    link.addEventListener("click", saveState);
+  });
+  paint();
+})();
+</script>
+</body>
+</html>
